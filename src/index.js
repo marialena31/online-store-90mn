@@ -7,7 +7,6 @@ import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Checkout from './components/Checkout';
 import Navbar from './components/Navbar';
-import registerServiceWorker from './registerServiceWorker';
 
 const Root = () => (
     <Router basename={"/OnlineStrapiEcommerce"}>
@@ -24,4 +23,3 @@ const Root = () => (
 )
 
 ReactDOM.render(<Root />, document.getElementById('root'));
-registerServiceWorker();
