@@ -83,7 +83,7 @@ function App () {
                      <Card
                          image={
                              <Box height={200} width={200}>
-                                <Image fit="cover" naturalHeight={1} naturalWidth={1} alt="Brand" src={`${apiUrl}${brand.Image.url}`}/>
+                                <Image fit="cover" naturalHeight={1} naturalWidth={1} alt="Brand" src={`${brand.Image.url}`}/>
                              </Box>
                          }
                      >
