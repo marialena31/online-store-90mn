@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-dom'
-import {Container, Box, Heading, Card, Image, Text, SearchField, Icon} from 'gestalt';
+import {Container, Box, Heading, Card, Image, Text, SearchField, Icon, Spinner} from 'gestalt';
 import './App.css';
 import Strapi from 'strapi-sdk-javascript/build/main';
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:1337'
@@ -9,6 +9,7 @@ const strapi = new Strapi(apiUrl);
 function App () {
     const [brands, setBrands] = React.useState([])
     const [searchTerm, setSearchTerm] = React.useState('')
+    const [loadingBrands, setLoadingBrands] = React.useState(true)
     React.useEffect(() => {
         try {
             async function callStrapiApi () {
@@ -29,10 +30,12 @@ function App () {
                     }
                 })
                 setBrands(response.data.brands)
+                setLoadingBrands(false)
             }
             callStrapiApi().then()
         } catch (err) {
             console.error(err)
+            setLoadingBrands(false)
         }
 
     }, [])
@@ -103,6 +106,7 @@ function App () {
                  </Box>
              ))}
          </Box>
+         <Spinner show={loadingBrands} accessibilityLabel={"Loading Spinner"}/>
      </Container>
     )
 }

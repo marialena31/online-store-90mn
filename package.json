@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://dev.expertecom.tech/OnlineStrapiEcommerce",
   "dependencies": {
-    "gestalt": "^0.79.2",
+    "gestalt": "^40",
     "npm": "^8.1.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
@@ -12,13 +12,17 @@
     "react-scripts": "^5.0.0",
     "react-spinners": "^0.4.5",
     "react-stripe-elements": "^2.0.1",
-    "strapi-sdk-javascript": "^0.2.1"
+    "strapi-sdk-javascript": "^0.2.1",
+    "svgo": "^2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "resolutions": {
+    "svgo": "^2.0"
   },
   "browserslist": {
     "production": [
