@@ -3,7 +3,7 @@ import {Link} from 'react-dom'
 import {Container, Box, Heading, Card, Image, Text, SearchField, Icon} from 'gestalt';
 import './App.css';
 import Strapi from 'strapi-sdk-javascript/build/main';
-const apiUrl = process.env.API_URL || 'http://localhost:1337'
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:1337'
 const strapi = new Strapi(apiUrl);
 
 function App () {

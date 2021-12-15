@@ -10,7 +10,7 @@ import Navbar from './components/Navbar';
 import registerServiceWorker from './registerServiceWorker';
 
 const Root = () => (
-    <Router>
+    <Router basename={"/OnlineStrapiEcommerce"}>
         <React.Fragment>
             <Navbar/>
             <Switch>

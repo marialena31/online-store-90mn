@@ -2,6 +2,7 @@
   "name": "ecommerce-react-graphql-stripe",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://games.marialena-pietri.fr/OnlineStrapiEcommerce",
   "dependencies": {
     "gestalt": "^0.79.2",
     "npm": "^8.1.2",
