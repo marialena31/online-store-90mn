@@ -1,6 +1,7 @@
 import React from 'react'
 import { Box, Text, Heading, Image } from 'gestalt'
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
+import DisplayStaticContent from './DisplayStaticContent'
 
 const Navbar = () => {
     return(
@@ -21,12 +22,7 @@ const Navbar = () => {
             <NavLink activeClassName="active" to="/">
                 <Box display="flex" alignItems="center">
                     <Box height={50} width={50}>
-                        <Image
-                            src="./icons/logo.svg"
-                            alt="BrewHaha Logo"
-                            naturalHeight={1}
-                            naturalWidth={1}
-                        />
+                        <DisplayStaticContent name="Logo"/>
                     </Box>
                     <Heading size="xs" color="orange">
                         BrewHaha
