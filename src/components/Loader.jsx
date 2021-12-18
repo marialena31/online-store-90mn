@@ -8,7 +8,7 @@ const Loader = ({show}) => (
     dangerouslySetInlineStyle={{__style: {
         bottom: 400,
         left: '50%',
-        transform: "translate("-50%")"
+        transform: "translate(-50%)"
         }}}
     >
         <RingLoader color="darkorange" size={200} />

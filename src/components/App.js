@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-dom'
+import {Link} from 'react-router-dom'
 import {Container, Box, Heading, Card, Image, Text, SearchField, Icon } from 'gestalt'
 import './App.css'
 import Strapi from 'strapi-sdk-javascript/build/main'
@@ -100,7 +100,7 @@ function App () {
                              <Text bold size="xl">{brand.name}</Text>
                              <Text >{brand.Description}</Text>
                              <Text bold size="xl">
-                                 {/*<Link to={`/${brand._id}`}>See Brews</Link>*/}
+                                 <Link to={`/${brand._id}`}>See Brews</Link>
                              </Text>
                          </Box>
                      </Card>

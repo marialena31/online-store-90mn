@@ -24,7 +24,6 @@ function DisplayStaticContent ({name}) {
                                 }`
                     }
                 })
-                console.log(response.data.staticContents[0].Image.url)
                 setUrl(response.data.staticContents[0].Image.url)
             }
 
