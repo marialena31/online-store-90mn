@@ -66,7 +66,7 @@ const _CheckoutForm = ({history, stripe}) => {
                 token
             })
             await strapi.request('POST', '/email', {
-                options: {
+                data: {
                     to: 'marialena.pietri@expertecom.fr',
                     subject: `Order Confirmation - BrewHaHa ${new Date(Date.now())}`,
                     text: 'Your order has been processed',
