@@ -8092,7 +8092,7 @@
     "react-emotion" "^9.1.1"
     "recompose" "0.27.1 - 0.30.0"
 
-"react-stripe-elements@^2.0.1":
+"react-stripe-elements@^2.0.3":
   "integrity" "sha512-aKLiWyfP0n3Gq42BKykULgoruNVRXEaeYh8NSokdgH3ubGU3nsHFZJg3LgbT/XOquttDGHE7kLhleaX+UnN81A=="
   "resolved" "https://registry.npmjs.org/react-stripe-elements/-/react-stripe-elements-2.0.3.tgz"
   "version" "2.0.3"

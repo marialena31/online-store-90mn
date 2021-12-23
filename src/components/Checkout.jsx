@@ -1,9 +1,14 @@
 import React from 'react'
 import {Container, Box, Button, Heading, Text, TextField, Modal, Spinner} from "gestalt";
-import {calculatePrice, getCart} from "../utils/utils";
+import { Elements, StripeProvider, CardElement, injectStripe } from "react-stripe-elements";
+import {calculatePrice, getCart, clearCart, calculateAmount} from "../utils/utils";
 import ToastMessage from "./ToastMessage";
+import Strapi from "strapi-sdk-javascript/build/main";
+import {withRouter} from 'react-router-dom'
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:1337'
+const strapi = new Strapi(apiUrl);
 
-const Checkout = ({history}) => {
+const _CheckoutForm = ({history, stripe}) => {
     const [address, setAddress] = React.useState('')
     const [postalCode, setPostalCode] = React.useState('')
     const [city, setCity] = React.useState('')
@@ -34,17 +39,54 @@ const Checkout = ({history}) => {
         return !address || !postalCode || !city || !confirmationEmailAddress
     }
 
-    const showToast = toastMessage => {
+    const showToast = (toastMessage,  redirect= false) => {
         setToast(true)
         setToastMessage(toastMessage)
         setTimeout(() => {
             setToast(false)
-            setToastMessage('false')
+            setToastMessage('false'),
+                // if true passed to 'redirect' argument, redirect home
+            () => redirect && history.push('/')
         }, 5000)
     }
 
-    const handleSubmitOrder = () => {
-        setModal(false)
+    const handleSubmitOrder = async () => {
+        setOrderProcessing(true)
+        const amount = calculateAmount(cartItems)
+        let token
+        try {
+            const response = await stripe.createToken()
+            token = response.token.id
+            await strapi.createEntry('orders', {
+                amount,
+                brews: cartItems,
+                city,
+                postalCode,
+                address,
+                token
+            })
+            await strapi.request('POST', '/email', {
+                data: {
+                    to: 'marialena.pietri@expertecom.fr',
+                    subject: `Order Confirmation - BrewHaHa ${new Date(Date.now())}`,
+                    text: 'Your order has been processed',
+                    html: '<bold> Expect your order to arrive in 2-3 shipping days</bold>'
+                }
+            })
+            setOrderProcessing(false)
+            setModal(false)
+            clearCart()
+            showToast('Your order has been successfully submitted!', true)
+            // Create stripe token
+            // Create order with strapi sdk (make request to backend
+            // set orderProcessing - false, setModal - false
+            // Clear user carat of brews
+            // show success toast
+        } catch (err) {
+            setOrderProcessing(false)
+            setModal(false)
+            showToast(err.message)
+        }
     }
 
     const closeModal = () => {
@@ -165,7 +207,7 @@ const Checkout = ({history}) => {
                     />
                     <TextField
                         id="postalCode"
-                        type="number"
+                        type="text"
                         name="postalCode"
                         placeholder="Postal code"
                         onChange={handleChange}
@@ -184,6 +226,8 @@ const Checkout = ({history}) => {
                         placeholder="Confirmation Email Address"
                         onChange={handleChange}
                     />
+                    {/*Credit Card element*/}
+                    <CardElement id="stripe__input" onReady={input => input.focus()}/>
                     <Button id="stripe__button" type="submit">Submit</Button>
                 </form>
                 </React.Fragment> : (
@@ -205,5 +249,15 @@ const Checkout = ({history}) => {
         </Container>
     )
 }
+
+const CheckoutForm = withRouter(injectStripe(_CheckoutForm))
+
+const Checkout = () => (
+    <StripeProvider apiKey="pk_test_51K9bIHHvZqdMpx7LuoVmWfntJ0qZquJKdtnfowDTlkiamQgR570Np3sELRKGwFYyAh11ucLK9PI2pLvQes0KGZDJ00qJvoS4mh">
+        <Elements>
+            <CheckoutForm/>
+        </Elements>
+    </StripeProvider>
+)
 
 export default Checkout;

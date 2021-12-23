@@ -11,7 +11,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "^5.0.0",
     "react-spinners": "^0.4.5",
-    "react-stripe-elements": "^2.0.1",
+    "react-stripe-elements": "^2.0.3",
     "strapi-sdk-javascript": "^0.2.1",
     "svgo": "^2.0"
   },
